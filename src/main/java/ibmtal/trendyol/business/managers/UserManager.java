@@ -27,22 +27,26 @@ public class UserManager implements UserService {
 	public Result<User> addUser(User user) {
 		Result<User> result=new Result<User>();
 		if(user.getUsername().isBlank()==true) {
+			result.setSuccess(false);
 			result.getErrors().add(
 			 new ResultItem("username", "Kullanıcı adı boş geçilemez")
 			);
 		}
 		if(user.getPassword().isBlank()==true) {
+			result.setSuccess(false);
 			result.getErrors().add(
 			 new ResultItem("password", "Şifre boş geçilemez")
 			);
 		}
 		if(user.getPassword().length()<8) {
+			result.setSuccess(false);
 			result.getErrors().add(
 			 new ResultItem("password", "Şifre en az 8 Karakter olmalı")
 			);
 		}
 		
 		if(user.getEmail().isBlank()==true) {
+			result.setSuccess(false);
 			result.getErrors().add(
 			 new ResultItem("email", "Mail Adresi boş geçilemez")
 			);
