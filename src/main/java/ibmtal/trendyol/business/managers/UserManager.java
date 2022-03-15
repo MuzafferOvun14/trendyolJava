@@ -8,6 +8,7 @@ import ibmtal.trendyol.business.services.UserService;
 import ibmtal.trendyol.core.result.Result;
 import ibmtal.trendyol.core.result.ResultItem;
 import ibmtal.trendyol.database.UserDao;
+import ibmtal.trendyol.dto.UserAddDto;
 import ibmtal.trendyol.entity.User;
 
 @Service
@@ -72,6 +73,26 @@ public class UserManager implements UserService {
 	@Override
 	public Result<User> getUser(Integer id) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Result<User> addUserDto(UserAddDto userAddDto) {
+		Result<User> result=new Result<User>();
+		if(userAddDto.getUsername().isBlank()==true) {
+			result.setSuccess(false);
+			result.getErrors().add(
+			  new ResultItem("username","Kullanıcı adı boş")
+			);
+		}
+		else if(this.userDao.getByUsername(
+					userAddDto.getUsername()).isEmpty()==false
+				) 
+		{
+			result.setSuccess(false);
+			result.getErrors().add(
+			  new ResultItem("username","Kullanıcı adı sistemde kayıtlı")
+			);			
+		}
 		return null;
 	}
 
