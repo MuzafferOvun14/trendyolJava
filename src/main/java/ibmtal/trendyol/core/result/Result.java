@@ -8,6 +8,9 @@ public class Result<T> {
 	private ArrayList<T> data;
 	public Result() {
 		super();
+		this.success = true;
+		this.errors = new ArrayList<ResultItem>();
+		this.data = new ArrayList<T>();
 	}
 	public Result(Boolean success, ArrayList<ResultItem> errors, ArrayList<T> data) {
 		super();

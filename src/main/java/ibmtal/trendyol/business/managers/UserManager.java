@@ -22,7 +22,7 @@ public class UserManager implements UserService {
 	public ArrayList<User> getAll() {
 	return new ArrayList<User>(this.userDao.findAll());
 	}
-  //aaaa
+  
 	@Override
 	public Result<User> addUser(User user) {
 		Result<User> result=new Result<User>();
