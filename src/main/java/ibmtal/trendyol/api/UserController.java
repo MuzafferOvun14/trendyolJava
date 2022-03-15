@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ibmtal.trendyol.business.services.UserService;
 import ibmtal.trendyol.core.result.Result;
-
+import ibmtal.trendyol.dto.UserAddDto;
 import ibmtal.trendyol.entity.User;
 @RestController
 @RequestMapping("/api/users")
@@ -24,5 +24,9 @@ public class UserController {
 	@PostMapping("/add")
 	public Result<User> addUser(@RequestBody User user) {
 		return this.userService.addUser(user);
+	}
+	@PostMapping("/adduser")
+	public Result<User> addUserDto(@RequestBody UserAddDto userAddDto) {
+		return this.userService.addUserDto(userAddDto);
 	}	
 }
