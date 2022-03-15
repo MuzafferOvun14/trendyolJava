@@ -51,8 +51,10 @@ public class UserManager implements UserService {
 			 new ResultItem("email", "Mail Adresi boş geçilemez")
 			);
 		}
-			
-		return null;
+		if(result.getSuccess()!=false) {
+			this.userDao.save(user);
+		}
+		return result;
 	}
 
 	@Override
