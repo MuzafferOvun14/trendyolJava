@@ -1,6 +1,8 @@
 package ibmtal.trendyol.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +28,7 @@ public class UserController {
 		return this.userService.addUser(user);
 	}
 	@PostMapping("/adduser")
+	@GetMapping
 	public Result<User> addUserDto(@RequestBody UserAddDto userAddDto) {
 		return this.userService.addUserDto(userAddDto);
 	}	
