@@ -52,6 +52,12 @@ public class UserManager implements UserService {
 			 new ResultItem("email", "Mail Adresi boş geçilemez")
 			);
 		}
+		if(user.getName().length()<2) {
+			result.setSuccess(false);
+			result.getErrors().add(
+			 new ResultItem("name", "Ad belirtmediniz")
+			);
+		}
 		if(result.getSuccess()!=false) {
 			this.userDao.save(user);
 		}
@@ -114,6 +120,14 @@ public class UserManager implements UserService {
 		if(userAddDto.getEmail().isBlank()==true) {
 			result.setSuccess(false);
 			result.getErrors().add(new ResultItem("email", "Boş Geçilemez"));
+		}
+		if(userAddDto.getName().isBlank()==true) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("name", "Boş Geçilemez"));
+		}
+		if(userAddDto.getSurname().isBlank()==true) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("surname", "Soyad Boş Geçilemez"));
 		}
 		if(result.getSuccess()==true) {
 			User user=new User();
