@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ibmtal.trendyol.business.services.UserService;
 import ibmtal.trendyol.core.result.Result;
 import ibmtal.trendyol.dto.CompanyAddDto;
+import ibmtal.trendyol.dto.LoginDto;
 import ibmtal.trendyol.dto.UserAddDto;
 import ibmtal.trendyol.entity.User;
 @RestController
@@ -37,5 +38,10 @@ public class UserController {
 	@GetMapping
 	public Result<User> addCompanyDto(@RequestBody CompanyAddDto companyAddDto ) {
 		return this.userService.addCompanyDto(companyAddDto);
+	}	
+	@PostMapping("/loginUser")
+	@GetMapping
+	public Result<User> loginUser(@RequestBody LoginDto loginDto ) {
+		return this.userService.login(loginDto);
 	}	
 }

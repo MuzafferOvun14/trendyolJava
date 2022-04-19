@@ -32,6 +32,9 @@ public class User {
 	private String website;	
 	@Column(name="usertype")
 	private String usertype;
+	@Column(name="session_code")
+	private String sessionCode;
+	
 	public User() {
 		super();
 	}
@@ -108,6 +111,27 @@ public class User {
 	}
 	public void setUsertype(String usertype) {
 		this.usertype = usertype;
+	}
+	public String getSessionCode() {
+		return sessionCode;
+	}
+	public void setSessionCode(String sessionCode) {
+		this.sessionCode = sessionCode;
+	}
+	public User(int id, String username, String password, String name, String surname, String adress, String phone,
+			String email, String website, String usertype, String sessionCode) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.adress = adress;
+		this.phone = phone;
+		this.email = email;
+		this.website = website;
+		this.usertype = usertype;
+		this.sessionCode = sessionCode;
 	}	
 
 }

@@ -203,8 +203,10 @@ public class UserManager implements UserService {
 	public Result<User> login(LoginDto loginDto) {
 		Result<User> result = new Result<User>();
 		User loginUser = new User();
-		loginUser = this.userDao.findByUsername(loginDto.getUsername());
-		if (loginUser.getUsername().isBlank()) {
+		if(this.userDao.getByUsername(loginDto.getUsername()).isEmpty()==false) {
+			loginUser=this.userDao.getByUsername(loginDto.getUsername()).get(0);
+		}
+		if (loginUser.getUsername().isEmpty()) {
 			result.setSuccess(false);
 			result.getErrors().add(new ResultItem("username", "Kullanıcı adı hatalı"));
 		} else if (loginDto.getPassword().equals(loginUser.getPassword()) == false) {
@@ -213,14 +215,15 @@ public class UserManager implements UserService {
 		}
 		if (result.getSuccess() == true) {
 			String metin =loginUser.getUsername()+"ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
-
-			StringBuilder sb = new StringBuilder(6);
-
+			StringBuilder sb = new StringBuilder(30);
 			for (int i = 0; i < 30; i++) {
 				int index = (int) (metin.length() * Math.random());
 				sb.append(metin.charAt(index));
 			}
 			String registrationcode = sb.toString();
+			loginUser.setSessionCode(registrationcode);
+			this.userDao.save(loginUser);
+			result.getData().add(loginUser);
 		}
 		return result;
 	}
