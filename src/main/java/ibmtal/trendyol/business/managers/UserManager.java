@@ -177,7 +177,12 @@ public class UserManager implements UserService {
 			result.getErrors().add(new ResultItem("rePassword", "şifreler uyuşmuyor"));
 		}
 		//companyName 
-		if(
+		if(companyAddDto.getCompanyName().isBlank()) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("companyName", "Şirket adı boş geçilemez"));
+			
+		}
+		else if(
 		  this.userDao.getByName(companyAddDto.getCompanyName()).isEmpty()==false
 		) {
 			result.setSuccess(false);
