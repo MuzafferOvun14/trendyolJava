@@ -176,7 +176,41 @@ public class UserManager implements UserService {
 			result.setSuccess(false);
 			result.getErrors().add(new ResultItem("rePassword", "şifreler uyuşmuyor"));
 		}
-		//companyName 		
+		//companyName 
+		if(
+		  this.userDao.getByName(companyAddDto.getCompanyName()).isEmpty()==false
+		) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("companyName", "Şirket adı sistemde kayıtlı"));
+		}
+		//phone
+		if(companyAddDto.getPhone().isBlank()) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("phone", "Telefon numarası girmediniz"));
+		}
+		//email
+		if(companyAddDto.getEmail().isBlank()) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("email", "E-Mail Adresi girmediniz"));
+		}
+		//adress
+		if(companyAddDto.getAdress().isBlank()) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("adress", "Adres Bilgisi girmediniz"));
+		}
+		//kayıt işlemi
+		if(result.getSuccess()==true) {
+			User user=new User();
+			user.setUsername(companyAddDto.getUsername());
+			user.setPassword(companyAddDto.getPassword());
+			user.setName(companyAddDto.getCompanyName());
+			user.setPhone(companyAddDto.getPhone());
+			user.setUsertype("company");
+			user.setEmail(companyAddDto.getEmail());
+			user.setAdress(companyAddDto.getAdress());
+			user.setWebsite(companyAddDto.getWebsite());
+			this.userDao.save(user);
+		}
 		return result;
 	}
 

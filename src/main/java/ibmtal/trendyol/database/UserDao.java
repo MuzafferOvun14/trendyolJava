@@ -8,4 +8,6 @@ import ibmtal.trendyol.entity.User;
 
 public interface UserDao extends JpaRepository<User, Integer> {
 	ArrayList<User> getByUsername(String username);
+	ArrayList<User> getByName(String name);
+	ArrayList<User> getByPhone(String phone);
 }
