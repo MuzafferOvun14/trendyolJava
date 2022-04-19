@@ -151,6 +151,7 @@ public class UserManager implements UserService {
 	@Override
 	public Result<User> addCompanyDto(CompanyAddDto companyAddDto) {
 		Result<User> result=new Result<User>();
+		//username kontrolleri
 		if(companyAddDto.getUsername().isBlank()) {
 			result.setSuccess(false);
 			result.getErrors().add(new ResultItem("username", "Kullanıcı Adı boş geçilemez"));
@@ -159,6 +160,23 @@ public class UserManager implements UserService {
 			result.setSuccess(false);
 			result.getErrors().add(new ResultItem("username", "Kullanıcı Adı sistemde kayıtlı"));
 		}
+		
+		//password kontrolleri
+		if(companyAddDto.getPassword().isBlank()) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("password", "şifre Boş Geçilemez"));
+		}
+		else if(companyAddDto.getPassword().length()<8) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("password", "şifre En az 8 Karakter olmalı "));
+		}
+		if(companyAddDto.getRePassword().equals(
+				companyAddDto.getPassword())==false
+		) {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("rePassword", "şifreler uyuşmuyor"));
+		}
+		//companyName 		
 		return result;
 	}
 
