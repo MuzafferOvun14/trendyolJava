@@ -206,6 +206,11 @@ public class UserManager implements UserService {
 		if(this.userDao.getByUsername(loginDto.getUsername()).isEmpty()==false) {
 			loginUser=this.userDao.getByUsername(loginDto.getUsername()).get(0);
 		}
+		else {
+			result.setSuccess(false);
+			result.getErrors().add(new ResultItem("username", "Kullanıcı adı hatalı"));
+			return result;
+		}
 		if (loginUser.getUsername().isEmpty()) {
 			result.setSuccess(false);
 			result.getErrors().add(new ResultItem("username", "Kullanıcı adı hatalı"));
